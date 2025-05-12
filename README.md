@@ -86,9 +86,9 @@ mv jac_video_backend/config.py.example jac_video_backend/config.py
 
 ### 前端环境变量
 - 在 `jac_video_frontend/.env.local` 中配置 API 地址
-mv jac_video_frontend/.env.example jac_video_frontend/.env
-```bash
 
+```bash
+mv jac_video_frontend/.env.example jac_video_frontend/.env
 ```
 
 ## 功能特性
