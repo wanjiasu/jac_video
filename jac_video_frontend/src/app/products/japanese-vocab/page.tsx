@@ -13,14 +13,14 @@ const Step = ({ title, isActive, onClick }: StepProps) => (
     onClick={onClick}
     className={`w-full p-4 text-left rounded-lg transition-all duration-200 
       ${isActive 
-        ? 'bg-white shadow-md border-l-4 border-[#8778E5] text-[#8778E5]' 
+        ? 'bg-white shadow-md border-l-4 border-[var(--primary)] text-[var(--primary)]' 
         : 'bg-gray-50 hover:bg-gray-100 text-gray-700'
       }`}
   >
     <div className="flex items-center gap-3">
       <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200
         ${isActive 
-          ? 'bg-gradient-to-r from-[#8778E5] to-[#EF6DA0] text-white shadow-md' 
+          ? 'bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] text-white shadow-md' 
           : 'bg-gradient-to-r from-gray-50 to-gray-100 text-gray-500 hover:from-gray-100 hover:to-gray-200'
         } border border-white/20 backdrop-blur-sm`}
       >
@@ -29,11 +29,11 @@ const Step = ({ title, isActive, onClick }: StepProps) => (
         </span>
       </div>
       <div className="flex flex-col">
-        <span className={`text-xs text-gray-500 ${isActive ? 'text-[#8778E5]/70' : ''}`}>
+        <span className={`text-xs text-gray-500 ${isActive ? 'text-[var(--primary)]/70' : ''}`}>
           {title.match(/步骤[一二三四五六]/)?.[0]}
         </span>
         <span className={`font-medium transition-colors duration-200
-          ${isActive ? 'text-[#8778E5]' : 'text-gray-700'}`}>
+          ${isActive ? 'text-[var(--primary)]' : 'text-gray-700'}`}>
           {title.replace(/步骤[一二三四五六]、/, '')}
         </span>
       </div>
@@ -624,8 +624,8 @@ export default function JapaneseVocabPage() {
       {/* 顶部标题区域 */}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <h1 className="text-2xl font-bold text-gray-900">日语单词学习视频生成器</h1>
-          <p className="mt-2 text-gray-600">按以下步骤设置，快速生成日语单词学习短视频</p>
+          <h1 className="main-title">日语单词学习视频生成器</h1>
+          <p className="sub-title">按以下步骤设置，快速生成日语单词学习短视频</p>
         </div>
       </div>
 
@@ -658,7 +658,7 @@ export default function JapaneseVocabPage() {
                   {/* 内容部分使用卡片式布局 */}
                   <div className="grid gap-8">
                     {/* 标题输入 */}
-                    <div className="bg-gray-50 rounded-lg p-6">
+                    <div className="card p-6">
                       <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-4">
                         标题
                       </label>
@@ -669,13 +669,12 @@ export default function JapaneseVocabPage() {
                         value={formData.title}
                         onChange={handleInputChange}
                         placeholder="请输入视频标题"
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                          focus:ring-[#FF3366] focus:border-transparent transition-colors"
+                        className="w-full px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                       />
                     </div>
 
                     {/* 形状选择 */}
-                    <div className="bg-gray-50 rounded-lg p-6">
+                    <div className="card p-6">
                       <label className="block text-sm font-medium text-gray-700 mb-4">
                         形状选择
                       </label>
@@ -708,7 +707,7 @@ export default function JapaneseVocabPage() {
                     {/* 颜色设置 */}
                     <div className="grid grid-cols-2 gap-6">
                       {/* 背景颜色 */}
-                      <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="card p-6">
                         <label htmlFor="backgroundColor" className="block text-sm font-medium text-gray-700 mb-4">
                           形状颜色
                         </label>
@@ -732,7 +731,7 @@ export default function JapaneseVocabPage() {
                       </div>
 
                       {/* 文字颜色 */}
-                      <div className="bg-gray-50 rounded-lg p-6">
+                      <div className="card p-6">
                         <label htmlFor="fontColor" className="block text-sm font-medium text-gray-700 mb-4">
                           文字颜色
                         </label>
@@ -772,8 +771,7 @@ export default function JapaneseVocabPage() {
                     <select
                       value={textModel}
                       onChange={(e) => setTextModel(e.target.value)}
-                      className="w-40 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                        focus:ring-[#FF3366] focus:border-transparent transition-colors"
+                      className="input-primary"
                     >
                       {textModels.map(model => (
                         <option key={model.id} value={model.id}>
@@ -787,15 +785,12 @@ export default function JapaneseVocabPage() {
                       value={vocabInput}
                       onChange={(e) => setVocabInput(e.target.value)}
                       placeholder="请输入日语单词"
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                        focus:ring-[#FF3366] focus:border-transparent transition-colors"
+                      className="flex-1 px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                     />
                     <button
                       onClick={handleGenerate}
                       disabled={generating || !vocabInput.trim()}
-                      className="px-6 py-2 bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] text-white 
-                        rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] disabled:opacity-50 
-                        disabled:cursor-not-allowed transition-all duration-200 min-w-[100px]"
+                      className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-w-[100px]"
                     >
                       {generating ? '生成中...' : '生成'}
                     </button>
@@ -804,7 +799,7 @@ export default function JapaneseVocabPage() {
                   {/* 修改生成结果展示区域 */}
                   <div className="mt-6">
                     <h3 className="text-sm font-medium text-gray-700 mb-2">生成结果</h3>
-                    <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="card p-4">
                       {vocabData ? (
                         <div className="space-y-4">
                           {/* 中心词编辑 */}
@@ -819,7 +814,7 @@ export default function JapaneseVocabPage() {
                                     ...vocabData,
                                     center_word: e.target.value
                                   })}
-                                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                  className="w-full px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                                   placeholder="日语"
                                 />
                               </div>
@@ -831,7 +826,7 @@ export default function JapaneseVocabPage() {
                                     ...vocabData,
                                     center_word_romaji: e.target.value
                                   })}
-                                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                  className="w-full px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                                   placeholder="罗马音"
                                 />
                               </div>
@@ -843,7 +838,7 @@ export default function JapaneseVocabPage() {
                                     ...vocabData,
                                     center_word_translation: e.target.value
                                   })}
-                                  className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                  className="w-full px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                                   placeholder="翻译"
                                 />
                               </div>
@@ -883,7 +878,7 @@ export default function JapaneseVocabPage() {
                                         surrounding_words: newWords
                                       })
                                     }}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                    className="w-full px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                                     placeholder="日语"
                                   />
                                 </div>
@@ -899,7 +894,7 @@ export default function JapaneseVocabPage() {
                                         surrounding_words_romaji: newRomaji
                                       })
                                     }}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                                    className="w-full px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                                     placeholder="罗马音"
                                   />
                                 </div>
@@ -915,7 +910,7 @@ export default function JapaneseVocabPage() {
                                         surrounding_words_translation: newTranslations
                                       })
                                     }}
-                                    className="flex-1 px-3 py-2 border border-gray-300 rounded-md"
+                                    className="flex-1 px-4 py-2.5 bg-white border-2 border-[var(--primary)] rounded-lg shadow-sm hover:shadow-md transition-all duration-200"
                                     placeholder="翻译"
                                   />
                                   <button
@@ -964,8 +959,7 @@ export default function JapaneseVocabPage() {
                         <select
                           value={videoParams.resolution}
                           onChange={(e) => setVideoParams({...videoParams, resolution: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                            focus:ring-[#FF3366] focus:border-transparent"
+                          className="input-primary"
                         >
                           <option value="480p">480p</option>
                           <option value="720p">720p</option>
@@ -978,8 +972,7 @@ export default function JapaneseVocabPage() {
                         <select
                           value={videoParams.aspectRatio}
                           onChange={(e) => setVideoParams({...videoParams, aspectRatio: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                            focus:ring-[#FF3366] focus:border-transparent"
+                          className="input-primary"
                         >
                           <option value="16:9">16:9</option>
                           <option value="4:3">4:3</option>
@@ -992,8 +985,7 @@ export default function JapaneseVocabPage() {
                         <select
                           value={videoParams.orientation}
                           onChange={(e) => setVideoParams({...videoParams, orientation: e.target.value})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                            focus:ring-[#FF3366] focus:border-transparent"
+                          className="input-primary"
                         >
                           <option value="portrait">竖向</option>
                           <option value="landscape">横向</option>
@@ -1006,8 +998,7 @@ export default function JapaneseVocabPage() {
                         <select
                           value={videoParams.frameRate}
                           onChange={(e) => setVideoParams({...videoParams, frameRate: Number(e.target.value)})}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                            focus:ring-[#FF3366] focus:border-transparent"
+                          className="input-primary"
                         >
                           <option value={24}>24 fps</option>
                           <option value={25}>25 fps</option>
@@ -1028,11 +1019,7 @@ export default function JapaneseVocabPage() {
                           <button
                             key={tab.id}
                             onClick={() => setBgMode(tab.id as 'ai' | 'upload')}
-                            className={`px-4 py-2 rounded-lg transition-all duration-200
-                              ${bgMode === tab.id 
-                                ? 'bg-[#FF3366] text-white' 
-                                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                              }`}
+                            className={`btn-secondary ${bgMode === tab.id ? 'active' : ''}`}
                           >
                             {tab.label}
                           </button>
@@ -1047,8 +1034,7 @@ export default function JapaneseVocabPage() {
                             <select
                               value={bgModel}
                               onChange={(e) => setBgModel(e.target.value)}
-                              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                                focus:ring-[#FF3366] focus:border-transparent transition-colors"
+                              className="input-primary"
                             >
                               {bgModels.map(model => (
                                 <option key={model.id} value={model.id}>
@@ -1060,27 +1046,16 @@ export default function JapaneseVocabPage() {
                             <button
                               onClick={handleGenerateBackground}
                               disabled={isGeneratingBg}
-                              className="px-6 py-2 bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] text-white 
-                                rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] disabled:opacity-50
-                                transition-all duration-200 min-w-[100px]"
+                              className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-w-[100px]"
                             >
                               {isGeneratingBg ? '生成中...' : 'AI生成背景'}
                             </button>
                           </div>
                         ) : (
                           <div className="text-center">
-                            <label className="cursor-pointer inline-block">
-                              <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleBackgroundUpload}
-                                className="hidden"
-                              />
-                              <div className="px-6 py-3 bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] text-white 
-                                rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] transition-all duration-200">
-                                选择图片
-                              </div>
-                            </label>
+                            <div className="btn-primary cursor-pointer">
+                              选择文件
+                            </div>
                           </div>
                         )}
                       </div>
@@ -1118,10 +1093,7 @@ export default function JapaneseVocabPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <button
                       onClick={() => setMusicMode('random')}
-                      className={`p-4 rounded-lg border-2 transition-all duration-200
-                        ${musicMode === 'random' 
-                          ? 'border-[#FF3366] bg-pink-50' 
-                          : 'border-gray-200 hover:border-gray-300'}`}
+                      className={`btn-secondary ${musicMode === 'random' ? 'active' : ''}`}
                     >
                       <div className="text-2xl mb-2">🎲</div>
                       <div className="font-medium">随机生成</div>
@@ -1129,10 +1101,7 @@ export default function JapaneseVocabPage() {
                     
                     <button
                       onClick={() => setMusicMode('upload')}
-                      className={`p-4 rounded-lg border-2 transition-all duration-200
-                        ${musicMode === 'upload' 
-                          ? 'border-[#FF3366] bg-pink-50' 
-                          : 'border-gray-200 hover:border-gray-300'}`}
+                      className={`btn-secondary ${musicMode === 'upload' ? 'active' : ''}`}
                     >
                       <div className="text-2xl mb-2">📤</div>
                       <div className="font-medium">上传MP3</div>
@@ -1146,27 +1115,16 @@ export default function JapaneseVocabPage() {
                         <button
                           onClick={handleGenerateRandomMusic}
                           disabled={isGeneratingMusic}
-                          className="px-6 py-3 bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] text-white 
-                            rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] disabled:opacity-50
-                            transition-all duration-200"
+                          className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {isGeneratingMusic ? '生成中...' : '随机生成音乐'}
                         </button>
                       </div>
                     ) : (
                       <div className="text-center">
-                        <label className="cursor-pointer inline-block">
-                          <input
-                            type="file"
-                            accept=".mp3"
-                            onChange={handleMusicUpload}
-                            className="hidden"
-                          />
-                          <div className="px-6 py-3 bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] text-white 
-                            rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] transition-all duration-200">
-                            选择MP3件
-                          </div>
-                        </label>
+                        <div className="btn-primary cursor-pointer">
+                          选择文件
+                        </div>
                       </div>
                     )}
                   </div>
@@ -1202,8 +1160,7 @@ export default function JapaneseVocabPage() {
                       <select
                         value={selectedModel}
                         onChange={(e) => setSelectedModel(e.target.value)}
-                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 
-                          focus:ring-[#FF3366] focus:border-transparent transition-colors"
+                        className="input-primary"
                       >
                         {voiceModels.map(model => (
                           <option key={model.id} value={model.id}>
@@ -1216,9 +1173,7 @@ export default function JapaneseVocabPage() {
                     <button
                       onClick={handleGenerateVoice}
                       disabled={isGeneratingVoice}
-                      className="px-6 py-2 bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] text-white 
-                        rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] disabled:opacity-50 
-                        disabled:cursor-not-allowed transition-all duration-200 min-w-[100px]"
+                      className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed min-w-[100px]"
                     >
                       {isGeneratingVoice ? '生成中...' : '生成'}
                     </button>
@@ -1238,7 +1193,7 @@ export default function JapaneseVocabPage() {
                       )}
                     </div>
                     
-                    <div className="bg-gray-50 rounded-lg p-4">
+                    <div className="card p-4">
                       {voiceGenerationResult ? (
                         <div className="space-y-2">
                           {/* 成功提示 */}
@@ -1282,9 +1237,7 @@ export default function JapaneseVocabPage() {
                         <button
                           onClick={handleDownload}
                           disabled={loading}
-                          className="px-4 py-2 text-white bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] 
-                            rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] text-sm disabled:opacity-50
-                            transition-all duration-200 flex items-center gap-2"
+                          className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           {loading ? (
                             <>
@@ -1332,7 +1285,7 @@ export default function JapaneseVocabPage() {
                       </div>
                       <div className="w-full bg-gray-200 rounded-full h-2.5">
                         <div 
-                          className="bg-[#FF3366] h-2.5 rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] h-2.5 rounded-full transition-all duration-300"
                           style={{ width: `${progress}%` }}
                         ></div>
                       </div>
@@ -1346,8 +1299,7 @@ export default function JapaneseVocabPage() {
                 <button
                   onClick={() => setActiveStep(Math.max(1, activeStep - 1))}
                   disabled={activeStep === 1}
-                  className="px-6 py-3 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 
-                    disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  className="btn-secondary disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   上一步
                 </button>
@@ -1355,9 +1307,7 @@ export default function JapaneseVocabPage() {
                 {activeStep < 6 ? (
                   <button
                     onClick={() => setActiveStep(Math.min(6, activeStep + 1))}
-                    className="px-6 py-3 text-white bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] 
-                      rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] transition-all duration-200
-                      shadow-md hover:shadow-lg"
+                    className="btn-primary"
                   >
                     下一步
                   </button>
@@ -1365,9 +1315,7 @@ export default function JapaneseVocabPage() {
                   <button
                     onClick={handleFinalGenerate}
                     disabled={loading}
-                    className="px-6 py-3 text-white bg-gradient-to-r from-[#FF3366] to-[#FF6B9B] 
-                      rounded-lg hover:from-[#FF4775] hover:to-[#FF7EAA] disabled:opacity-50
-                      transition-all duration-200 shadow-md hover:shadow-lg"
+                    className="btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {loading ? '生成中...' : '开始生成'}
                   </button>
