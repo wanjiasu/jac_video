@@ -26,7 +26,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 # 安装依赖
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 安装开发依赖
 RUN pip install --no-cache-dir watchdog
