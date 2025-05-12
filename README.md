@@ -10,9 +10,7 @@
 
 ## 使用示例
 
-https://github.com/wanjiasu/jac_video/assets/use_example.mp4
-
-或直接查看视频文件：[查看示例视频](use_example.mp4)
+https://github.com/user-attachments/assets/5ddbe4f2-16d4-4049-85be-3c69522704af
 
 项目根目录下的 `use_example.mp4` 展示了完整的使用流程：
 
