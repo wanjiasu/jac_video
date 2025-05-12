@@ -29,6 +29,10 @@ cp jac_video_backend/config.py.example jac_video_backend/config.py
 
 根据实际需要修改配置文件中的参数，特别是生产环境相关的参数。
 
+.env
+config.py
+前端dockerfile 2个地址
+
 #### 前端配置
 
 前端的环境变量已经在 Dockerfile.prod 中配置，无需额外操作。如果需要自定义，可以编辑 `jac_video_frontend/.env.production` 文件。
