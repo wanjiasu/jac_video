@@ -64,6 +64,7 @@ jac_video_backend/static/voices/*
 
 # Media files
 *.mp4
+!use_example.mp4
 
 # Config files
 jac_video_backend/config.py
