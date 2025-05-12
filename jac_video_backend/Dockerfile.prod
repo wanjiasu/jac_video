@@ -1,0 +1,51 @@
+# jac_video_backend/Dockerfile.prod
+FROM python:3.9-slim
+
+# 设置工作目录
+WORKDIR /app
+
+# 设置环境变量
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+ENV TZ=Asia/Shanghai
+
+# 使用阿里云镜像源，这通常比清华源更稳定
+RUN echo \
+    deb https://mirrors.aliyun.com/debian/ bookworm main contrib non-free non-free-firmware\n\
+    deb https://mirrors.aliyun.com/debian/ bookworm-updates main contrib non-free non-free-firmware\n\
+    deb https://mirrors.aliyun.com/debian/ bookworm-backports main contrib non-free non-free-firmware\n\
+    deb https://mirrors.aliyun.com/debian-security bookworm-security main contrib non-free non-free-firmware\
+    > /etc/apt/sources.list
+
+# 添加重试机制和超时设置
+RUN apt-get clean && \
+    apt-get update -o Acquire::Retries=3 && \
+    apt-get install -y --no-install-recommends \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libfontconfig1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# 复制依赖文件
+COPY requirements.txt .
+
+# 安装依赖，使用阿里云的PyPI镜像
+RUN pip install --no-cache-dir -r requirements.txt -i https://mirrors.aliyun.com/pypi/simple/
+
+# 创建必要的目录并设置权限
+RUN mkdir -p /app/static/images \
+    /app/static/voices \
+    /app/static/bgm \
+    && chmod -R 755 /app/static
+
+# 复制源代码
+COPY . .
+
+# 暴露端口
+EXPOSE 5001
+
+# 生产环境启动命令，不使用热重载
+CMD ["uvicorn", "src.main:app", "--host", "0.0.0.0", "--port", "5001", "--workers", "4"] 
