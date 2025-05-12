@@ -83,14 +83,14 @@ docker-compose up --build
 - 在 `jac_video_backend/config.py` 中配置相关 API 密钥
 
 ```bash
-mv jac_video_backend/config.py.example jac_video_backend/config.py
+cp jac_video_backend/config.py.example jac_video_backend/config.py
 ```
 
 ### 前端环境变量
 - 在 `jac_video_frontend/.env.local` 中配置 API 地址
 
 ```bash
-mv jac_video_frontend/.env.example jac_video_frontend/.env
+cp jac_video_frontend/.env.example jac_video_frontend/.env
 ```
 
 ## 功能特性
