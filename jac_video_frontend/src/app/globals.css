@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* 调整为MoodColor风格的配色方案 */
+  --primary: #8778E5;  /* 主色调-紫色 */
+  --primary-light: #A28DFF;
+  --primary-dark: #6D65C9;
+  --secondary: #EF6DA0; /* 辅色调-粉色 */
+  --secondary-light: #FF85B6;
+  --secondary-dark: #D45A89;
+  
+  /* 中性色 */
+  --background: #F5F7FF;  /* 浅紫色背景 */
+  --foreground: #4A4A68;  /* 深紫灰色文字 */
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+
+  /* 功能色 */
+  --success: #00C48C;
+  --warning: #FFB800;
+  --error: #FF3B3B;
+  --info: #0084FF;
+}
+
+body {
+  color: var(--foreground);
+  background: linear-gradient(135deg, #F5F7FF 0%, #F0E9FF 100%);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-400);
+}
+
+/* 动画类 */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* 通用组件样式 */
+.btn-primary {
+  @apply px-4 py-2 bg-gradient-to-r from-[#8778E5] to-[#EF6DA0] text-white rounded-full
+    hover:shadow-md transition-all duration-300 
+    focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-white text-[#8778E5] border border-[#8778E5] rounded-full
+    hover:bg-[#F5F7FF] transition-colors duration-300
+    focus:ring-2 focus:ring-purple-500 focus:ring-offset-2;
+}
+
+.input-primary {
+  @apply block w-full rounded-full border-gray-200 shadow-sm
+    focus:border-purple-400 focus:ring-purple-400 px-4 py-3;
+}
+
+/* 卡片样式 */
+.card {
+  @apply bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-300;
+}
+
+/* 渐变文字 */
+.gradient-text {
+  @apply bg-gradient-to-r from-[#6A5CFF] via-[#B278FF] to-[#EF6DA0] bg-clip-text text-transparent;
+}
+
+/* 页面容器 */
+.page-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-24;
+}
+
+/* 主标题 */
+.main-title {
+  @apply text-4xl md:text-6xl font-bold mb-6 gradient-text text-center;
+}
+
+/* 副标题 */
+.sub-title {
+  @apply text-xl md:text-2xl mb-8 text-center text-gray-600;
+}
+
+/* 圆形按钮 */
+.circle-btn {
+  @apply w-12 h-12 rounded-full flex items-center justify-center bg-white shadow-sm 
+    hover:shadow-md transition-shadow duration-300;
+}

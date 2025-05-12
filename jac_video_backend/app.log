@@ -1,0 +1,49 @@
+2025-01-16 09:38:45,304 - src.routers.japanese_vocab - INFO - Processing request for model: Spark 4.0 Ultra, word: 寿司
+2025-01-16 09:39:02,761 - src.services.model_service.xinghuo_service - ERROR - Failed to parse content as JSON: 寿司是一种**日本传统美食**，它以醋饭和各种海鲜、蔬菜或鸡蛋等食材为配料，形式多样，口味丰富。寿司的起源可以追溯到东南亚和中国沿海地区，经过长时间的演变和发展，形成了现今广为人知的日本料理。以下是对寿司相关信息的具体介绍：
+
+1. **历史背景**
+   - **起源发展**：寿司最初起源于东南亚，后传入中国沿海，由唐朝传入日本。在日本，寿司经历了从“熟寿司”到现代各种形式的演变，成为日本文化的代表之一。
+   - **种类区分**：寿司主要分为握寿司、卷寿司、散寿司等多个种类，其中握寿司是最为人们所熟知的一种形式。
+
+2. **主要特点**
+   - **食材选择**：寿司的主要材料包括醋饭、新鲜的海鲜（如鱼片、虾、海胆、三文鱼籽等）、蔬菜、以及特制的酱料如芥末和酱油。
+   - **制作工艺**：制作寿司时，醋饭的温度控制、鱼肉的切割技巧以及最终的摆盘都极需细致入微的工艺，体现了日本料理追求完美的特点。
+
+3. **文化意义**
+   - **饮食文化**：寿司不仅是日本料理中的重要组成部分，也反映了日本人对食物的审美观和“少即是多”的哲学思想。
+   - **国际影响**：随着全球化的发展，寿司已经成为国际上广受欢迎的美食，各种日式料理店和回转寿司在全球范围内都极为常见。
+
+综上所述，寿司不仅是一种食物，更是承载了丰富历史文化内涵的日本代表美食。无论是其精致的制作工艺还是独特的风味，基本都使得寿司成为世界各地人们餐桌上的佳肴。对于喜欢日本料理的朋友来说，品尝不同种类的寿司，了解其背后的文化故事，无疑增加了许多饮食的乐趣。
+2025-01-16 09:39:02,763 - src.services.model_service.xinghuo_service - ERROR - Unexpected error: Invalid response format from model
+2025-01-16 09:39:02,768 - src.routers.japanese_vocab - ERROR - Unexpected error: Invalid response format from model
+Traceback (most recent call last):
+  File "/Users/kuriball/Documents/MyProjects/03 react/jac_video/jac_video_backend/src/services/model_service/xinghuo_service.py", line 58, in get_text_response
+    content_dict = json.loads(content_str)
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kuriball/Documents/MyProjects/03 react/jac_video/jac_video_backend/src/services/model_service/xinghuo_service.py", line 63, in get_text_response
+    raise ModelAPIError(
+src.core.exceptions.ModelAPIError: Invalid response format from model
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kuriball/Documents/MyProjects/03 react/jac_video/jac_video_backend/src/routers/japanese_vocab.py", line 30, in get_text_by_model
+    content_dict, usage_dict = await model_service.get_text_response(word)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kuriball/Documents/MyProjects/03 react/jac_video/jac_video_backend/src/services/model_service/xinghuo_service.py", line 94, in get_text_response
+    raise ModelServiceError(str(e), "xinghuo")
+src.core.exceptions.ModelServiceError: Invalid response format from model
+

@@ -1,0 +1,45 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./jac_video_frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_BASE_URL=http://localhost:5001
+    volumes:
+      - ./jac_video_frontend:/app  # 挂载源代码
+      - /app/node_modules  # 排除 node_modules
+      - /app/.next  # 排除 .next 构建目录
+    command: npm run dev  # 使用开发模式启动
+    depends_on:
+      - backend
+    networks:
+      - jac_video_network
+
+  backend:
+    build:
+      context: ./jac_video_backend
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./jac_video_backend:/app
+      - /app/env  # 排除虚拟环境目录
+      # 明确指定 bgm 目录的挂载
+      - ./jac_video_backend/static/bgm:/app/static/bgm:rw
+      - ./jac_video_backend/static/images:/app/static/images:rw
+      - ./jac_video_backend/static/voices:/app/static/voices:rw
+    command: uvicorn src.main:app --host 0.0.0.0 --port 5001 --reload
+    networks:
+      - jac_video_network
+
+networks:
+  jac_video_network:
+    driver: bridge
+
+volumes:
+  backend_static:  # 添加命名卷来持久化静态文件

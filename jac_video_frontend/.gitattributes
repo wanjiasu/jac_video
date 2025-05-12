@@ -1,0 +1,22 @@
+# 将所有文本文件的行尾统一设置为 LF
+* text=auto eol=lf
+
+# 特别指定某些文件类型
+*.tsx text eol=lf
+*.ts text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+
+# 二进制文件不转换
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.pdf binary
